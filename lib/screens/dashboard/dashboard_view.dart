@@ -303,7 +303,7 @@ class DashboardView extends GetView<DashboardController> {
                     subtitle: 'Submit an issue',
                     color: const Color(0xFFEAF1FF),
                     iconColor: const Color(0xFF2563EB),
-                    onTap: () => controller.openFeature('Report Complaint'),
+                    onTap: controller.openReportComplaint,
                   ),
 
                   _serviceCard(
@@ -312,7 +312,7 @@ class DashboardView extends GetView<DashboardController> {
                     subtitle: 'Track your reports',
                     color: const Color(0xFFE9F8F0),
                     iconColor: const Color(0xFF16A36A),
-                    onTap: () => controller.openFeature('My Complaints'),
+                    onTap: controller.openMyComplaints,
                   ),
 
                   _serviceCard(
@@ -321,7 +321,7 @@ class DashboardView extends GetView<DashboardController> {
                     subtitle: 'Find lost items',
                     color: const Color(0xFFFFF3E6),
                     iconColor: const Color(0xFFE58A24),
-                    onTap: () => controller.openFeature('Lost & Found'),
+                    onTap: controller.openLostFound,
                   ),
 
                   _serviceCard(
@@ -330,7 +330,7 @@ class DashboardView extends GetView<DashboardController> {
                     subtitle: 'Manage account',
                     color: const Color(0xFFF2ECFF),
                     iconColor: const Color(0xFF8855D9),
-                    onTap: () => controller.openFeature('My Profile'),
+                    onTap: controller.openProfile,
                   ),
                 ],
               ),
@@ -423,7 +423,7 @@ class DashboardView extends GetView<DashboardController> {
                   ),
 
                   TextButton(
-                    onPressed: () => controller.openFeature('My Complaints'),
+                    onPressed: controller.openMyComplaints,
                     child: const Text(
                       'View All',
                       style: TextStyle(
