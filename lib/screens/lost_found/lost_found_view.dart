@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/lost_found_controller.dart';
+import 'package:studentapp/utils/routes/app_routes.dart';
 
 class LostFoundView extends GetView<LostFoundController> {
   const LostFoundView({super.key});
@@ -426,7 +427,9 @@ class LostFoundView extends GetView<LostFoundController> {
       borderRadius: BorderRadius.circular(18),
       child: InkWell(
         borderRadius: BorderRadius.circular(18),
-        onTap: () => _showItemDetails(item),
+        onTap: () {
+          Get.toNamed(AppRoutes.itemDetails, arguments: item);
+        },
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(

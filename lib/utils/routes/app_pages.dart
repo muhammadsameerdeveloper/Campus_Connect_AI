@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:studentapp/screens/complaints/complaint_view.dart';
+import 'package:studentapp/screens/complaints/complaints_overview_view.dart';
+import 'package:studentapp/screens/complaints/my_complaints_view.dart';
 
-import 'app_routes.dart';
-import '../../controllers/lost_found_controller.dart';
-import '../../screens/lost_found/lost_found_view.dart';
 // Controllers
 import '../../controllers/splash_controller.dart';
 import '../../controllers/onboarding_controller.dart';
@@ -12,8 +9,10 @@ import '../../controllers/auth_controller.dart';
 import '../../controllers/dashboard_controller.dart';
 import '../../controllers/ai_assistant_controller.dart';
 import '../../controllers/complaint_controller.dart';
-import '../../controllers/my_complaints_controller.dart';
-import '../../screens/complaints/my_complaints_view.dart';
+import '../../controllers/lost_found_controller.dart';
+import '../../controllers/profile_controller.dart';
+import '../../screens/announcements/announcements_view.dart';
+import '../../screens/help_support/help_support_view.dart';
 // Screens
 import '../../screens/splash/splash_view.dart';
 import '../../screens/onboarding/onboarding_view.dart';
@@ -22,6 +21,13 @@ import '../../screens/auth/signup_view.dart';
 import '../../screens/auth/forgot_password_view.dart';
 import '../../screens/dashboard/dashboard_view.dart';
 import '../../screens/ai_assistant/ai_assistant_view.dart';
+import '../../screens/complaints/complaint_view.dart';
+import '../../screens/item_details/item_details_view.dart';
+import '../../screens/lost_found/lost_found_view.dart';
+import '../../screens/profile/profile_view.dart';
+import '../../screens/services/services_view.dart';
+
+import 'app_routes.dart';
 
 class AppPages {
   static final pages = [
@@ -29,7 +35,7 @@ class AppPages {
       name: AppRoutes.splash,
       page: () => const SplashView(),
       binding: BindingsBuilder(() {
-        Get.put<SplashController>(SplashController());
+        Get.put(SplashController());
       }),
     ),
 
@@ -37,7 +43,7 @@ class AppPages {
       name: AppRoutes.onboarding,
       page: () => const OnboardingView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<OnboardingController>(() => OnboardingController());
+        Get.lazyPut(() => OnboardingController());
       }),
     ),
 
@@ -45,121 +51,72 @@ class AppPages {
       name: AppRoutes.login,
       page: () => const LoginView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<AuthController>(() => AuthController());
+        Get.lazyPut(() => AuthController());
       }),
     ),
 
-    GetPage(
-      name: AppRoutes.signup,
-      page: () => const SignupView(),
-      binding: BindingsBuilder(() {
-        Get.lazyPut<AuthController>(() => AuthController());
-      }),
-    ),
+    GetPage(name: AppRoutes.signup, page: () => const SignupView()),
 
     GetPage(
       name: AppRoutes.forgotPassword,
       page: () => const ForgotPasswordView(),
-      binding: BindingsBuilder(() {
-        Get.lazyPut<AuthController>(() => AuthController());
-      }),
     ),
 
     GetPage(
       name: AppRoutes.dashboard,
       page: () => const DashboardView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<DashboardController>(() => DashboardController());
+        Get.lazyPut(() => DashboardController());
       }),
+    ),
+
+    GetPage(name: AppRoutes.services, page: () => const ServicesView()),
+
+    GetPage(
+      name: AppRoutes.complaints,
+      page: () => const ComplaintsOverviewView(),
     ),
 
     GetPage(
       name: AppRoutes.aiAssistant,
       page: () => const AIAssistantView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<AIAssistantController>(() => AIAssistantController());
+        Get.lazyPut(() => AIAssistantController());
       }),
     ),
 
-    // Report Complaint
     GetPage(
       name: AppRoutes.reportComplaint,
       page: () => const ComplaintView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<ComplaintController>(() => ComplaintController());
+        Get.lazyPut(() => ComplaintController());
       }),
     ),
 
-    // My Complaints
-    // My Complaints
-    GetPage(
-      name: AppRoutes.myComplaints,
-      page: () => const MyComplaintsView(),
-      binding: BindingsBuilder(() {
-        Get.lazyPut<MyComplaintsController>(() => MyComplaintsController());
-      }),
-    ),
+    GetPage(name: AppRoutes.myComplaints, page: () => const MyComplaintsView()),
 
-    // Lost & Found
-    // Lost & Found
     GetPage(
       name: AppRoutes.lostFound,
       page: () => const LostFoundView(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<LostFoundController>(() => LostFoundController());
+        Get.lazyPut(() => LostFoundController());
       }),
     ),
 
-    // My Profile
     GetPage(
       name: AppRoutes.profile,
-      page: () => const FeaturePlaceholderView(
-        title: 'My Profile',
-        icon: Icons.person_rounded,
-      ),
+      page: () => const ProfileView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => ProfileController());
+      }),
     ),
+
+    GetPage(
+      name: AppRoutes.announcements,
+      page: () => const AnnouncementsView(),
+    ),
+    GetPage(name: AppRoutes.itemDetails, page: () => const ItemDetailsView()),
+
+    GetPage(name: AppRoutes.helpSupport, page: () => const HelpSupportView()),
   ];
-}
-
-// Temporary screens
-class FeaturePlaceholderView extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const FeaturePlaceholderView({
-    super.key,
-    required this.title,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF6F8FC),
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF17315F),
-        elevation: 0,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 65, color: const Color(0xFF2563EB)),
-            const SizedBox(height: 15),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'This screen is coming soon.',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

@@ -8,14 +8,32 @@ class DashboardController extends GetxController {
   void changeTab(int index) {
     selectedIndex.value = index;
 
-    if (index != 0) {
-      Get.snackbar(
-        'Coming Soon',
-        'This section will be available soon.',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+    switch (index) {
+      case 0:
+        // Home
+        selectedIndex.value = 0;
+        break;
 
-      selectedIndex.value = 0;
+      case 1:
+        // Services
+        Get.toNamed(AppRoutes.services)?.then((_) {
+          selectedIndex.value = 0;
+        });
+        break;
+
+      case 2:
+        // Complaints
+        Get.toNamed(AppRoutes.complaints)?.then((_) {
+          selectedIndex.value = 0;
+        });
+        break;
+
+      case 3:
+        // Profile
+        Get.toNamed(AppRoutes.profile)?.then((_) {
+          selectedIndex.value = 0;
+        });
+        break;
     }
   }
 
